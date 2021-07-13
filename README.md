@@ -35,6 +35,10 @@ assert_df_equality(df1, df2)
 
 ![BeavisDataFramesNotEqualError](https://github.com/MrPowers/beavis/blob/main/images/beavis_dataframes_not_equal_error.png)
 
+DataFrame comparison options:
+
+* `check_index` (default `True`)
+
 ### Column comparisons
 
 Here's the built-in error message when comparing series that are not equal.

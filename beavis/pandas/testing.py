@@ -9,13 +9,21 @@ class BeavisDataFramesNotEqualError(Exception):
     pass
 
 
+class BeavisIndicesNotEqualError(Exception):
+    """The indices are not equal"""
+
+    pass
+
+
 class BeavisColumnsNotEqualError(Exception):
     """The columns are not equal"""
 
     pass
 
 
-def assert_df_equality(df1, df2):
+def assert_df_equality(df1, df2, check_index=True):
+    if check_index:
+        assert_index_equality(df1, df2)
     rows1 = df1.values.tolist()
     rows2 = df2.values.tolist()
     if rows1 != rows2:
@@ -27,6 +35,20 @@ def assert_df_equality(df1, df2):
             else:
                 t.add_row([r1, r2])
         raise BeavisDataFramesNotEqualError("\n" + t.get_string())
+
+
+def assert_index_equality(df1, df2):
+    index1 = df1.index.tolist()
+    index2 = df2.index.tolist()
+    if index1 != index2:
+        t = PrettyTable(["index1", "index2"])
+        zipped = list(six.moves.zip_longest(index1, index2))
+        for r1, r2 in zipped:
+            if r1 == r2:
+                t.add_row([blue(r1), blue(r2)])
+            else:
+                t.add_row([r1, r2])
+        raise BeavisIndicesNotEqualError("\n" + t.get_string())
 
 
 def assert_column_equality(df, col_name1, col_name2):
