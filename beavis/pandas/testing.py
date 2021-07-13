@@ -15,15 +15,23 @@ class BeavisIndicesNotEqualError(Exception):
     pass
 
 
+class BeavisDTypesNotEqualError(Exception):
+    """The indices are not equal"""
+
+    pass
+
+
 class BeavisColumnsNotEqualError(Exception):
     """The columns are not equal"""
 
     pass
 
 
-def assert_df_equality(df1, df2, check_index=True):
+def assert_df_equality(df1, df2, check_index=True, check_dtype=True):
     if check_index:
         assert_index_equality(df1, df2)
+    if check_dtype:
+        assert_dtype_equality(df1, df2)
     rows1 = df1.values.tolist()
     rows2 = df2.values.tolist()
     if rows1 != rows2:
@@ -49,6 +57,20 @@ def assert_index_equality(df1, df2):
             else:
                 t.add_row([r1, r2])
         raise BeavisIndicesNotEqualError("\n" + t.get_string())
+
+
+def assert_dtype_equality(df1, df2):
+    dtypes1 = df1.dtypes.tolist()
+    dtypes2 = df2.dtypes.tolist()
+    if dtypes1 != dtypes2:
+        t = PrettyTable(["dtypes1", "dtypes2"])
+        zipped = list(six.moves.zip_longest(dtypes1, dtypes2))
+        for r1, r2 in zipped:
+            if r1 == r2:
+                t.add_row([blue(r1), blue(r2)])
+            else:
+                t.add_row([r1, r2])
+        raise BeavisDTypesNotEqualError("\n" + t.get_string())
 
 
 def assert_column_equality(df, col_name1, col_name2):

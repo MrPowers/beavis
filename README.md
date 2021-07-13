@@ -38,6 +38,7 @@ assert_df_equality(df1, df2)
 DataFrame comparison options:
 
 * `check_index` (default `True`)
+* `check_dtype` (default `True`)
 
 ### Column comparisons
 

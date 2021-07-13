@@ -16,6 +16,12 @@ def describe_assert_frame_equal():
         with pytest.raises(AssertionError) as e_info:
             pd.testing.assert_frame_equal(df1, df2)
 
+    def it_throws_when_dtypes_do_not_match():
+        df1 = pd.DataFrame({"col1": [1.0, 2], "col2": [3.0, 4]})
+        df2 = pd.DataFrame({"col1": [1, 2], "col2": [3, 4]})
+        with pytest.raises(AssertionError) as e_info:
+            pd.testing.assert_frame_equal(df1, df2)
+
 
 def describe_assert_series_equal():
     def it_throws_when_series_content_is_not_equal():
