@@ -2,13 +2,18 @@ from beavis.prettytable import PrettyTable
 from beavis.bcolors import *
 import beavis.six as six
 
+
 class BeavisDataFramesNotEqualError(Exception):
-   """The DataFrames are not equal"""
-   pass
+    """The DataFrames are not equal"""
+
+    pass
+
 
 class BeavisColumnsNotEqualError(Exception):
-   """The columns are not equal"""
-   pass
+    """The columns are not equal"""
+
+    pass
+
 
 def assert_df_equality(df1, df2):
     rows1 = df1.values.tolist()
@@ -22,6 +27,7 @@ def assert_df_equality(df1, df2):
             else:
                 t.add_row([r1, r2])
         raise BeavisDataFramesNotEqualError("\n" + t.get_string())
+
 
 def assert_column_equality(df, col_name1, col_name2):
     elements = df[[col_name1, col_name2]].values.tolist()
@@ -38,4 +44,3 @@ def assert_column_equality(df, col_name1, col_name2):
             else:
                 t.add_row([str(elements[0]), str(elements[1])])
         raise BeavisColumnsNotEqualError("\n" + t.get_string())
-
