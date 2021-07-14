@@ -44,7 +44,7 @@ def describe_assert_pd_column_equality():
         with pytest.raises(beavis.BeavisColumnsNotEqualError) as e_info:
             beavis.assert_pd_column_equality(df, "col1", "col2")
 
-def describe_assert_df_equality():
+def describe_assert_dd_equality():
     # Vanilla equality
     def it_throws_when_df_content_is_not_equal():
         df1 = pd.DataFrame({"col1": [1, 2], "col2": [3, 4]})

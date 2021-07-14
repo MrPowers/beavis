@@ -40,6 +40,18 @@ DataFrame comparison options:
 * `check_index` (default `True`)
 * `check_dtype` (default `True`)
 
+Let's convert the Pandas DataFrames to Dask DataFrames and use the `assert_dd_equality` function to check they're equal.
+
+```python
+ddf1 = dd.from_pandas(df1, npartitions=2)
+ddf2 = dd.from_pandas(df2, npartitions=2)
+beavis.assert_dd_equality(ddf1, ddf2)
+```
+
+These DataFrames aren't equal, so we'll get a good error message that's easy to debug.
+
+![Dask DataFrames not equal](https://github.com/MrPowers/beavis/blob/main/images/dd_not_equal.png)
+
 ### Column comparisons
 
 Here's the built-in error message when comparing series that are not equal.
