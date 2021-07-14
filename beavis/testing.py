@@ -1,6 +1,7 @@
 from beavis.prettytable import PrettyTable
 from beavis.bcolors import *
 import beavis.six as six
+import beavis
 
 
 class BeavisDataFramesNotEqualError(Exception):
@@ -73,15 +74,20 @@ def assert_pd_dtype_equality(df1, df2):
         raise BeavisDTypesNotEqualError("\n" + t.get_string())
 
 
-def assert_pd_column_equality(df, col_name1, col_name2):
+def assert_pd_column_equality(df, col_name1, col_name2, equality_fun=None):
     elements = df[[col_name1, col_name2]].values.tolist()
     colName1Elements = list(map(lambda x: x[0], elements))
     colName2Elements = list(map(lambda x: x[1], elements))
-    if colName1Elements != colName2Elements:
+    all_equal = None
+    if equality_fun is None:
+        all_equal = colName1Elements == colName2Elements
+    else:
+        all_equal = beavis.equality.lists_are_equal(colName1Elements, colName2Elements, equality_fun)
+    if not all_equal:
         zipped = list(zip(colName1Elements, colName2Elements))
         t = PrettyTable([col_name1, col_name2])
         for elements in zipped:
-            if elements[0] == elements[1]:
+            if (elements[0] == elements[1] if equality_fun is None else equality_fun(elements[0], elements[1])):
                 first = bcolors.LightBlue + str(elements[0]) + bcolors.LightRed
                 second = bcolors.LightBlue + str(elements[1]) + bcolors.LightRed
                 t.add_row([first, second])

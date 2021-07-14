@@ -33,7 +33,7 @@ E   [left]:  [1042, 2, 9, 6]
 E   [right]: [5, 2, 7, 6]
 ```
 
-Here's the beavis error message that's provides aligned output with different colors to highlight the rows that don't match.
+Here's the beavis error message that aligns rows and highlights the mismatches in red.
 
 ```python
 import beavis
@@ -95,3 +95,14 @@ beavis.assert_dd_equality(ddf1, ddf2)
 These DataFrames aren't equal, so we'll get a good error message that's easy to debug.
 
 ![Dask DataFrames not equal](https://github.com/MrPowers/beavis/blob/main/images/dd_not_equal.png)
+
+## Development
+
+Install Poetry and run `poetry install` to create a virtual environment with all the Beavis dependencies on your machine.
+
+Other useful commands:
+
+* `poetry run pytest tests` runs the test suite
+* `poetry run black .` to format the code
+* `poetry build` packages the library in a wheel file
+* `poetry publish` releases the library in PyPi (need correct credentials)

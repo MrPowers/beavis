@@ -1,5 +1,7 @@
 import pytest
 
+import math
+
 import pandas as pd
 import dask.dataframe as dd
 import beavis
@@ -43,6 +45,20 @@ def describe_assert_pd_column_equality():
         df = pd.DataFrame({"col1": [1042, 2, 9, 6], "col2": [5, 2, 7, 6]})
         with pytest.raises(beavis.BeavisColumnsNotEqualError) as e_info:
             beavis.assert_pd_column_equality(df, "col1", "col2")
+
+    # Custom equality
+    def it_support_custom_equality_matches():
+        df = pd.DataFrame({"col1": [1.05, 1.92, 3.01], "col2": [1, 2, 3]})
+        def approx_equality(a, b):
+            return math.isclose(a, b, rel_tol=0.1)
+        beavis.assert_pd_column_equality(df, "col1", "col2", equality_fun=approx_equality)
+
+    def it_support_custom_equality_failures():
+        df = pd.DataFrame({"col1": [4.5, 1.92, 3.01], "col2": [1, 2, 3]})
+        def approx_equality(a, b):
+            return math.isclose(a, b, rel_tol=0.1)
+        with pytest.raises(beavis.BeavisColumnsNotEqualError) as e_info:
+            beavis.assert_pd_column_equality(df, "col1", "col2", equality_fun=approx_equality)
 
 
 def describe_assert_dd_equality():
