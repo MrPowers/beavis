@@ -27,11 +27,11 @@ class BeavisColumnsNotEqualError(Exception):
     pass
 
 
-def assert_df_equality(df1, df2, check_index=True, check_dtype=True):
+def assert_pd_equality(df1, df2, check_index=True, check_dtype=True):
     if check_index:
-        assert_index_equality(df1, df2)
+        assert_pd_index_equality(df1, df2)
     if check_dtype:
-        assert_dtype_equality(df1, df2)
+        assert_pd_dtype_equality(df1, df2)
     rows1 = df1.values.tolist()
     rows2 = df2.values.tolist()
     if rows1 != rows2:
@@ -45,7 +45,7 @@ def assert_df_equality(df1, df2, check_index=True, check_dtype=True):
         raise BeavisDataFramesNotEqualError("\n" + t.get_string())
 
 
-def assert_index_equality(df1, df2):
+def assert_pd_index_equality(df1, df2):
     index1 = df1.index.tolist()
     index2 = df2.index.tolist()
     if index1 != index2:
@@ -59,7 +59,7 @@ def assert_index_equality(df1, df2):
         raise BeavisIndicesNotEqualError("\n" + t.get_string())
 
 
-def assert_dtype_equality(df1, df2):
+def assert_pd_dtype_equality(df1, df2):
     dtypes1 = df1.dtypes.tolist()
     dtypes2 = df2.dtypes.tolist()
     if dtypes1 != dtypes2:
@@ -73,7 +73,7 @@ def assert_dtype_equality(df1, df2):
         raise BeavisDTypesNotEqualError("\n" + t.get_string())
 
 
-def assert_column_equality(df, col_name1, col_name2):
+def assert_pd_column_equality(df, col_name1, col_name2):
     elements = df[[col_name1, col_name2]].values.tolist()
     colName1Elements = list(map(lambda x: x[0], elements))
     colName2Elements = list(map(lambda x: x[1], elements))
@@ -88,3 +88,7 @@ def assert_column_equality(df, col_name1, col_name2):
             else:
                 t.add_row([str(elements[0]), str(elements[1])])
         raise BeavisColumnsNotEqualError("\n" + t.get_string())
+
+
+def assert_dd_equality(df1, df2, check_index=True, check_dtype=True):
+    assert_pd_equality(df1.compute(), df2.compute())

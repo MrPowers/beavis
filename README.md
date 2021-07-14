@@ -4,7 +4,7 @@ Pandas and Dask test helper methods.
 
 ![cornholio](https://github.com/MrPowers/beavis/blob/main/images/cornholio.jpg)
 
-## pandas test helpers
+## test helpers
 
 ### DataFrame comparisons
 
@@ -28,9 +28,9 @@ E   [right]: [5, 2]
 beavis provides a nicer error message.
 
 ```python
-from beavis.pandas.testing import assert_df_equality
+import beavis
 
-assert_df_equality(df1, df2)
+beavis.assert_pd_equality(df1, df2)
 ```
 
 ![BeavisDataFramesNotEqualError](https://github.com/MrPowers/beavis/blob/main/images/beavis_dataframes_not_equal_error.png)
@@ -62,7 +62,7 @@ E   [right]: [5, 2, 7, 6]
 Here's the beavis error message that's easier to read.
 
 ```python
-assert_column_equality(df, "col1", "col2")
+beavis.assert_pd_column_equality(df, "col1", "col2")
 ```
 
 ![BeavisColumnsNotEqualError](https://github.com/MrPowers/beavis/blob/main/images/beavis_columns_not_equal_error.png)
