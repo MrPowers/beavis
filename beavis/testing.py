@@ -92,3 +92,7 @@ def assert_pd_column_equality(df, col_name1, col_name2):
 
 def assert_dd_equality(df1, df2, check_index=True, check_dtype=True):
     assert_pd_equality(df1.compute(), df2.compute())
+
+
+def assert_dd_column_equality(df, col_name1, col_name2):
+    assert_pd_column_equality(df.compute(), col_name1, col_name2)

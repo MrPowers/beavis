@@ -25,6 +25,6 @@ def describe_assert_frame_equal():
 
 def describe_assert_series_equal():
     def it_throws_when_series_content_is_not_equal():
-        df = pd.DataFrame({"col1": [1, 2, 9, 6], "col2": [5, 2, 7, 6]})
+        df = pd.DataFrame({"col1": [1042, 2, 9, 6], "col2": [5, 2, 7, 6]})
         with pytest.raises(AssertionError) as e_info:
             pd.testing.assert_series_equal(df["col1"], df["col2"])

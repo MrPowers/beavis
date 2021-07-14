@@ -40,9 +40,10 @@ def describe_assert_pd_equality():
 
 def describe_assert_pd_column_equality():
     def it_throws_when_df_columns_are_not_equal():
-        df = pd.DataFrame({"col1": [1, 2, 9, 6], "col2": [5, 2, 7, 6]})
+        df = pd.DataFrame({"col1": [1042, 2, 9, 6], "col2": [5, 2, 7, 6]})
         with pytest.raises(beavis.BeavisColumnsNotEqualError) as e_info:
             beavis.assert_pd_column_equality(df, "col1", "col2")
+
 
 def describe_assert_dd_equality():
     # Vanilla equality
@@ -60,3 +61,11 @@ def describe_assert_dd_equality():
         df2 = pd.DataFrame({"col1": [1, 2], "col2": [3, 4]})
         ddf2 = dd.from_pandas(df2, npartitions=2)
         beavis.assert_dd_equality(ddf1, ddf2)
+
+
+def describe_assert_dd_column_equality():
+    def it_throws_when_df_columns_are_not_equal():
+        df = pd.DataFrame({"col1": [1042, 2, 9, 6], "col2": [5, 2, 7, 6]})
+        ddf = dd.from_pandas(df, npartitions=2)
+        with pytest.raises(beavis.BeavisColumnsNotEqualError) as e_info:
+            beavis.assert_dd_column_equality(ddf, "col1", "col2")
