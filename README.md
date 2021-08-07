@@ -77,7 +77,7 @@ beavis provides a nicer error message.
 beavis.assert_pd_equality(df1, df2)
 ```
 
-![BeavisDataFramesNotEqualError](https://github.com/MrPowers/beavis/blob/main/images/beavis_dataframes_not_equal_error.png)
+![BeavisDataFramesNotEqualError](https://github.com/MrPowers/beavis/blob/main/images/assert_pd_equality_error.png)
 
 DataFrame comparison options:
 
@@ -94,7 +94,11 @@ beavis.assert_dd_equality(ddf1, ddf2)
 
 These DataFrames aren't equal, so we'll get a good error message that's easy to debug.
 
-![Dask DataFrames not equal](https://github.com/MrPowers/beavis/blob/main/images/dd_not_equal.png)
+![Dask DataFrames not equal](https://github.com/MrPowers/beavis/blob/main/images/assert_dd_equality_error.png)
+
+If the dtypes aren't equal `assert_dd_equality` will give you another error message that's also easy to understand.
+
+![Dask DataFrames dtypes not equal](https://github.com/MrPowers/beavis/blob/main/images/assert_dd_equality_dtype_error.png)
 
 ## Development
 
