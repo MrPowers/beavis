@@ -49,37 +49,28 @@ def assert_pd_equality(
             raise BeavisDataFramesNotEqualError("\n" + t.get_string())
     else:
         col_names = df1.columns.values.tolist()
-        print(col_names)
         col_equalities = list(
             map(
                 lambda x: equality_funs.get(x, beavis.equality.default_equality),
                 col_names,
             )
         )
-        print(col_equalities)
         t = PrettyTable(["df1", "df2"])
         zipped = list(six.moves.zip_longest(rows1, rows2))
         all_equal = True
         for r1, r2 in zipped:
             z2 = list(zip(r1, r2, col_equalities))
-            colored_r1 = ""
-            colored_r2 = ""
+            colored_r1 = []
+            colored_r2 = []
             for e1, e2, fun in z2:
-                print("here")
-                print(e1)
-                print(e2)
-                print(fun)
                 if fun(e1, e2):
-                    colored_r1 = colored_r1 + ", " + bcolors.LightBlue + str(e1) + bcolors.LightRed
-                    colored_r2 = colored_r2 + ", " + bcolors.LightBlue + str(e2) + bcolors.LightRed
-                    # t.add_row([blue(r1), blue(r2)])
-                    # continue
+                    colored_r1.append(blue(e1))
+                    colored_r2.append(blue(e2))
                 else:
                     all_equal = False
-                    # t.add_row([r1, r2])
-                    colored_r1 = colored_r1 + ", " + bcolors.LightRed + str(e1)
-                    colored_r2 = colored_r2 + ", " + bcolors.LightRed + str(e2)
-            t.add_row([colored_r1, colored_r2])
+                    colored_r1.append(str(e1))
+                    colored_r2.append(str(e2))
+            t.add_row([", ".join(colored_r1), ", ".join(colored_r2)])
         if not all_equal:
             raise BeavisDataFramesNotEqualError("\n" + t.get_string())
 
