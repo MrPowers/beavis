@@ -4,6 +4,10 @@ Pandas and Dask test helper methods with beautiful error messages.
 
 ![cornholio](https://github.com/MrPowers/beavis/blob/main/images/cornholio.jpg)
 
+## Intall
+
+Install with pip: `pip install beavis`
+
 ## test helpers
 
 These test helper methods are meant to be used in test suites.  They provide descriptive error messages to allow for a seamless development workflow.
@@ -99,6 +103,53 @@ These DataFrames aren't equal, so we'll get a good error message that's easy to 
 If the dtypes aren't equal `assert_dd_equality` will give you another error message that's also easy to understand.
 
 ![Dask DataFrames dtypes not equal](https://github.com/MrPowers/beavis/blob/main/images/assert_dd_equality_dtype_error.png)
+
+## Dask helpers
+
+Create a Dask DataFrame:
+
+```python
+import beavis
+
+ddf = beavis.create_ddf(
+    [[1, "a"], [2, "b"], [3, "c"], [4, "d"]], ["nums", "letters"], npartitions=2
+)
+```
+
+Print all the partitions in the DataFrame.
+
+```python
+beavis.print_partitions(ddf)
+```
+
+```
+   nums letters
+0     1       a
+1     2       b
+   nums letters
+2     3       c
+3     4       d
+```
+
+Print the human readable dtypes of the DataFrame.
+
+```python
+print(ddf.dtypes)
+```
+
+```
+nums       int64
+letters    object
+dtype: object
+```
+
+Print the dtypes using code formatting.
+
+```python
+beavis.print_dtypes(ddf)
+
+# {'nums': 'int64', 'letters': 'object'}
+```
 
 ## Development
 

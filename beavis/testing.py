@@ -123,7 +123,7 @@ def assert_pd_column_equality(df, col_name1, col_name2, equality_fun=None):
 
 
 def assert_dd_equality(df1, df2, check_index=True, check_dtype=True):
-    assert_pd_equality(df1.compute(), df2.compute())
+    assert_pd_equality(df1.compute(), df2.compute(), check_index, check_dtype)
 
 
 def assert_dd_column_equality(df, col_name1, col_name2):

@@ -19,4 +19,17 @@ def describe_print_dtypes():
             {"nums": [1, 2, 3, 4, 5, 6], "letters": ["a", "b", "c", "d", "e", "f"]}
         )
         ddf = dd.from_pandas(df, npartitions=2)
+        assert ddf.npartitions == 2
         beavis.print_dtypes(ddf)
+
+
+def describe_create_ddf():
+    def it_creates_a_ddf():
+        df = pd.DataFrame({"nums": [1, 2, 3, 4], "letters": ["a", "b", "c", "d"]})
+        expected = dd.from_pandas(df, npartitions=2)
+        ddf = beavis.create_ddf(
+            [[1, "a"], [2, "b"], [3, "c"], [4, "d"]], ["nums", "letters"], npartitions=2
+        )
+        assert expected.npartitions == 2
+        assert ddf.npartitions == 2
+        beavis.assert_dd_equality(expected, ddf)
