@@ -161,3 +161,4 @@ Other useful commands:
 * `poetry run black .` to format the code
 * `poetry build` packages the library in a wheel file
 * `poetry publish` releases the library in PyPi (need correct credentials)
+
