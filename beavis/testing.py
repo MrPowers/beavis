@@ -2,6 +2,7 @@ from beavis.prettytable import PrettyTable
 from beavis.bcolors import *
 import beavis.six as six
 import beavis
+import math
 
 
 class BeavisDataFramesNotEqualError(Exception):
@@ -64,6 +65,19 @@ def assert_pd_equality(
         t.add_row([", ".join(colored_r1), ", ".join(colored_r2)])
     if not all_equal:
         raise BeavisDataFramesNotEqualError("\n" + t.get_string())
+
+
+def assert_approx_pd_equality(
+    df1, df2, precision, check_index=True, check_dtype=True
+):
+    def approx_equality(a, b):
+        return math.isclose(a, b, rel_tol=precision)
+    dtypes = df1.dtypes
+    equality_funs = {}
+    for k, v in dtypes.items():
+        if str(v) == "float64":
+            equality_funs[k] = approx_equality
+    assert_pd_equality(df1, df2, check_index, check_dtype, equality_funs)
 
 
 def assert_pd_index_equality(df1, df2):

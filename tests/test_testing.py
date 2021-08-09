@@ -66,6 +66,13 @@ def describe_assert_pd_equality():
         beavis.assert_pd_equality(df1, df2, check_dtype=False)
 
 
+def describe_assert_approx_pd_equality():
+    def it_allows_for_approx_comparisons():
+        df1 = pd.DataFrame({"col1": ["hi", "aa"], "col2": [3.05, 3.99]})
+        df2 = pd.DataFrame({"col1": ["hi", "aa"], "col2": [3, 4]})
+        beavis.assert_approx_pd_equality(df1, df2, 0.1, check_dtype=False)
+
+
 def describe_assert_pd_column_equality():
     def it_throws_when_df_columns_are_not_equal():
         df = pd.DataFrame({"col1": [1042, 2, 9, 6], "col2": [5, 2, 7, 6]})
