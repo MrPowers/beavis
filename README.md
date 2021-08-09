@@ -151,6 +151,22 @@ beavis.print_dtypes(ddf)
 # {'nums': 'int64', 'letters': 'object'}
 ```
 
+## Pandas helpers
+
+Create a Pandas DataFrame with data organized in rows:
+
+```python
+import beavis
+
+df = beavis.create_pdf([(1, "a"), (2, "b"), (3, "c")], ["nums", "letters"])
+```
+
+This can be more intuitive than the built-in Pandas DataFrame creation methods that force you to think of data in columns.
+
+```
+pd.DataFrame({"nums": [1, 2, 3], "letters": ["a", "b", "c"]})
+```
+
 ## Development
 
 Install Poetry and run `poetry install` to create a virtual environment with all the Beavis dependencies on your machine.
