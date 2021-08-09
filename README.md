@@ -1,8 +1,12 @@
 # beavis
 
-Pandas and Dask test helper methods with beautiful error messages.
+Pandas and Dask helper methods.
 
 ![cornholio](https://github.com/MrPowers/beavis/blob/main/images/cornholio.jpg)
+
+1. [test helpers](https://github.com/MrPowers/beavis#test-helpers)
+2. [Dask helpers](https://github.com/MrPowers/beavis#dask-helpers)
+3. [Pandas helpers](https://github.com/MrPowers/beavis#pandas-helpers)
 
 ## Intall
 
@@ -112,7 +116,7 @@ Create a Dask DataFrame:
 import beavis
 
 ddf = beavis.create_ddf(
-    [[1, "a"], [2, "b"], [3, "c"], [4, "d"]], ["nums", "letters"], npartitions=2
+    [[1, "a"], [2, "b"], [3, "c"], [4, "d"]], ["nums", "letters"]
 )
 ```
 
@@ -130,6 +134,8 @@ beavis.print_partitions(ddf)
 2     3       c
 3     4       d
 ```
+
+`create_ddf` creates Dask DataFrames with two partitions by default.
 
 Print the human readable dtypes of the DataFrame.
 
@@ -163,7 +169,7 @@ df = beavis.create_pdf([(1, "a"), (2, "b"), (3, "c")], ["nums", "letters"])
 
 This can be more intuitive than the built-in Pandas DataFrame creation methods that force you to think of data in columns.
 
-```
+```python
 pd.DataFrame({"nums": [1, 2, 3], "letters": ["a", "b", "c"]})
 ```
 
