@@ -8,6 +8,8 @@ Pandas and Dask helper methods.
 2. [Dask helpers](https://github.com/MrPowers/beavis#dask-helpers)
 3. [Pandas helpers](https://github.com/MrPowers/beavis#pandas-helpers)
 
+See [this blog post](https://mungingdata.com/pandas/unit-testing-pandas/) for a full description on how to use Beavis to test your code.
+
 ## Intall
 
 Install with pip: `pip install beavis`
