@@ -33,3 +33,12 @@ def describe_create_ddf():
         assert expected.npartitions == 2
         assert ddf.npartitions == 2
         beavis.assert_dd_equality(expected, ddf)
+
+
+def describe_memory_by_partition():
+    def it_returns_memory_by_partition():
+        ddf = beavis.create_ddf(
+            [[1, "a"], [2, "b"], [3, "c"], [4, "d"]], ["nums", "letters"], npartitions=2
+        )
+        res = beavis.memory_by_partition(ddf)
+        print(res)

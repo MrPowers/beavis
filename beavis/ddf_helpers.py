@@ -20,3 +20,7 @@ def create_ddf(rows, col_names, npartitions=2):
         res[col_name] = transposed[idx]
     df = pd.DataFrame(res)
     return dd.from_pandas(df, npartitions=npartitions)
+
+
+def memory_by_partition(ddf):
+    return ddf.map_partitions(lambda x: x.memory_usage(deep=True).sum()).compute()
