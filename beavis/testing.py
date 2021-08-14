@@ -67,11 +67,10 @@ def assert_pd_equality(
         raise BeavisDataFramesNotEqualError("\n" + t.get_string())
 
 
-def assert_approx_pd_equality(
-    df1, df2, precision, check_index=True, check_dtype=True
-):
+def assert_approx_pd_equality(df1, df2, precision, check_index=True, check_dtype=True):
     def approx_equality(a, b):
         return math.isclose(a, b, rel_tol=precision)
+
     dtypes = df1.dtypes
     equality_funs = {}
     for k, v in dtypes.items():
