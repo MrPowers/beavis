@@ -42,3 +42,12 @@ def describe_memory_by_partition():
         )
         res = beavis.memory_by_partition(ddf)
         print(res)
+
+
+def describe_partition_report():
+    def it_prints_partition_bucket_counts():
+        ddf = beavis.create_ddf(
+            [[1, "a"], [2, "b"], [3, "c"], [4, "d"]], ["nums", "letters"], npartitions=2
+        )
+        print("** PARTITION REPORT")
+        beavis.partition_report(ddf)

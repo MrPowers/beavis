@@ -159,6 +159,22 @@ beavis.print_dtypes(ddf)
 # {'nums': 'int64', 'letters': 'object'}
 ```
 
+You can get a high level overview of how data is distributed in a cluster with `partition_report`.
+
+```python
+beavis.partition_report(ddf)
+```
+
+It'll output a report like this:
+
+```
+Total number of partitions: 1095
+Total DataFrame memory: 101.71 kiB
+Num partitions < 1 KB: 1095 (100.0%)
+Num partitions < 1 MB: 1095 (100.0%)
+Num partitions > 1 GB: 0 (0.0%)
+```
+
 ## Pandas helpers
 
 Create a Pandas DataFrame with data organized in rows:
