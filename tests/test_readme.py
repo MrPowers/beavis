@@ -26,8 +26,8 @@ def describe_pandas_column_testing():
         beavis.assert_pd_column_equality(df, "col1_startswith_s", "expected")
 
     def it_shows_best_formatting():
-        df = beavis.create_pdf(
-            [("sap", 3, True), ("hi", 4, False)], ["col1", "col2", "expected"]
+        df = pd.DataFrame.from_records(
+            [("sap", 3, True), ("hi", 4, False)], columns=["col1", "col2", "expected"]
         )
         startswith_s(df, "col1", "col1_startswith_s")
         beavis.assert_pd_column_equality(df, "col1_startswith_s", "expected")
