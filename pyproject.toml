@@ -6,7 +6,6 @@ authors = ["MrPowers <matthewkevinpowers@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-dask = ">2021.01.1"
 pandas = ">=1.0.0"
 
 [tool.poetry.dev-dependencies]
